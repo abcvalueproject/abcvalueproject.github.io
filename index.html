@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Survey Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+  <body>
+
+    <form onsubmit="onSearchSubmit()">
+      First name: <input type="text" name="first_name">
+      Last name: <input type="text" name="last_name">
+      <input type="submit">
+    </form>
+
+    <div id="survey-results" style="display:none;">
+      <div class="student-card">
+        <!-- student answers here -->
+        <span>What is your best quality?</span>
+        <span class="answer-1"></span>
+      </div>
+    </div>
+
+
+
+    <script type='text/javascript'>
+
+    function onSearchSubmit() {
+      var first_name = document.getElementsByName('first_name')[0].value;
+      var last_name = document.getElementsByName('last_name')[0].value;
+
+      // i.e.   "natalie_warner": { // student object }
+
+      // go through surveyData = [ "firstname_lastname" : {} ]
+      // for loop
+      // for( var i= 0; i < surveyData.length: i++ ){
+      //
+      // }
+
+
+      /*
+        surveyData.forEach(function(student_name) {
+          console.log(student_name);
+          // if match, show on html
+          // replace student data in survey-results > student-card
+          // show survey-results
+        });
+
+      */
+
+      // Show on the survey-results innerHtml
+    }
+
+    function downloadData() {
+      var xmlhttp = new XMLHttpRequest();
+      // this is relative path so if you change the
+      var url = "survey-data.json";
+
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var myArr = JSON.parse(this.responseText);
+          window.surveyData = myArr;
+        }
+      };
+      xmlhttp.open("GET", url, true);
+      xmlhttp.send();
+    }
+    window.onload = downloadData;
+    </script>
+
+  </body>
+</html>
